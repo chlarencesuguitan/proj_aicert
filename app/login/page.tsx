@@ -1,10 +1,12 @@
 'use client'
-
+import Link from 'next/link'
+import { useRouter} from  'next/navigation'
 import { FormEvent, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
   const supabase = createClient()
+  const router = useRouter()
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -43,7 +45,8 @@ export default function LoginPage() {
       return
     }
 
-    setSuccess('Login successful.')
+    router.push('/dashboard')
+    router.refresh()
   }
 
   return (
@@ -85,6 +88,13 @@ export default function LoginPage() {
           {loading ? 'Logging in...' : 'Log in'}
         </button>
       </form>
+    <p>
+      Don&apos;t have an account?{' '}
+      <Link href="/register">Create an account</Link>
+    </p>
+      <p>
+        <Link href="/forgot-password">Forgot password?</Link>
+      </p>
     </main>
   )
 }

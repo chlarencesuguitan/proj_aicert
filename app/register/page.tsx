@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 
 import { FormEvent, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
@@ -143,6 +144,10 @@ export default function RegisterPage() {
           {loading ? 'Creating account...' : 'Create account'}
         </button>
       </form>
+      <p>
+        Already have an account?{' '}
+        <Link href="/login">Log in</Link>
+      </p>
     </main>
   )
 }
