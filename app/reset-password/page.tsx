@@ -1,6 +1,7 @@
 'use client'
-import Link from 'next/link'
 
+import Image from 'next/image'
+import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -79,66 +80,231 @@ export default function ResetPasswordPage() {
     setConfirmPassword('')
   }
 
+  // Checking reset link / invalid link state
   if (!ready) {
     return (
-      <main>
-        <h1>Reset password</h1>
+      <main className="min-h-screen bg-[#f7f6f8] flex items-center justify-center px-6 py-12">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-lg shadow-sm px-8 py-10 sm:px-10">
 
-        {error ? (
-          <p role="alert">{error}</p>
-        ) : (
-          <p>Checking reset link...</p>
-        )}
+            {/* Logo */}
+            <div className="flex justify-center mb-6">
+              <Link href="/" aria-label="Go to homepage">
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo"
+                  width={48}
+                  height={48}
+                  priority
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+
+            {/* Heading */}
+            <div className="text-center">
+              <h1 className="text-base font-medium text-gray-800">
+                Reset Password
+              </h1>
+
+              {error ? (
+                <div
+                  role="alert"
+                  className="mt-4 rounded-md bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
+                >
+                  {error}
+                </div>
+              ) : (
+                <p className="mt-2 text-xs text-gray-400">
+                  Checking your password reset link...
+                </p>
+              )}
+            </div>
+
+            {/* Back to login */}
+            {error && (
+              <p className="mt-5 text-center text-xs text-gray-500">
+                <Link
+                  href="/login"
+                  className="font-medium text-[#e8aa0f] transition hover:text-[#c98f00]"
+                >
+                  Back to Login
+                </Link>
+              </p>
+            )}
+          </div>
+        </div>
       </main>
     )
   }
 
   return (
-    <main>
-      <h1>Reset password</h1>
+    <main className="min-h-screen bg-[#f7f6f8] flex items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md">
+        <div className="bg-white rounded-lg shadow-sm px-8 py-10 sm:px-10">
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="password">New password</label>
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <Link href="/" aria-label="Go to homepage">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                width={48}
+                height={48}
+                priority
+                className="object-contain"
+              />
+            </Link>
+          </div>
 
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            disabled={loading}
-            required
-          />
+          {/* Heading */}
+          <div className="text-center mb-7">
+            <h1 className="text-base font-medium text-gray-800">
+              Reset Password
+            </h1>
+
+            <p className="mt-2 text-xs leading-relaxed text-gray-400">
+              Enter your new password below.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+            {/* New Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="mb-1.5 block text-xs font-medium text-gray-600"
+              >
+                New Password
+              </label>
+
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                disabled={loading}
+                required
+                autoComplete="new-password"
+                placeholder="Enter your new password"
+                className="
+                  h-10
+                  w-full
+                  rounded-md
+                  bg-[#f3f1ed]
+                  px-3
+                  text-xs
+                  text-gray-800
+                  placeholder:text-gray-400
+                  outline-none
+                  transition
+                  focus:bg-white
+                  focus:ring-2
+                  focus:ring-[#f5b719]/20
+                  focus:border-[#f5b719]
+                  disabled:cursor-not-allowed
+                  disabled:opacity-60
+                "
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="mb-1.5 block text-xs font-medium text-gray-600"
+              >
+                Confirm New Password
+              </label>
+
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(event) =>
+                  setConfirmPassword(event.target.value)
+                }
+                disabled={loading}
+                required
+                autoComplete="new-password"
+                placeholder="Confirm your new password"
+                className="
+                  h-10
+                  w-full
+                  rounded-md
+                  bg-[#f3f1ed]
+                  px-3
+                  text-xs
+                  text-gray-800
+                  placeholder:text-gray-400
+                  outline-none
+                  transition
+                  focus:bg-white
+                  focus:ring-2
+                  focus:ring-[#f5b719]/20
+                  focus:border-[#f5b719]
+                  disabled:cursor-not-allowed
+                  disabled:opacity-60
+                "
+              />
+            </div>
+
+            {/* Error */}
+            {error && (
+              <div
+                role="alert"
+                className="rounded-md bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
+              >
+                {error}
+              </div>
+            )}
+
+            {/* Success */}
+            {success && (
+              <div
+                role="status"
+                className="rounded-md bg-green-50 px-3 py-2 text-xs leading-relaxed text-green-600"
+              >
+                {success}
+              </div>
+            )}
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+                h-10
+                w-full
+                rounded-md
+                bg-[#f5b719]
+                text-xs
+                font-medium
+                text-white
+                transition
+                hover:bg-[#e8aa0f]
+                active:scale-[0.99]
+                disabled:cursor-not-allowed
+                disabled:opacity-60
+              "
+            >
+              {loading ? 'Updating...' : 'Update Password'}
+            </button>
+          </form>
+
+          {/* Login link */}
+          <p className="mt-4 text-center text-xs text-gray-500">
+            Remember your password?{' '}
+            <Link
+              href="/login"
+              className="font-medium text-[#e8aa0f] transition hover:text-[#c98f00]"
+            >
+              Back to Login
+            </Link>
+          </p>
         </div>
-
-        <div>
-          <label htmlFor="confirmPassword">
-            Confirm new password
-          </label>
-
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(event) =>
-              setConfirmPassword(event.target.value)
-            }
-            disabled={loading}
-            required
-          />
-        </div>
-
-        {error && <p role="alert">{error}</p>}
-
-        {success && <p role="status">{success}</p>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? 'Updating...' : 'Update password'}
-        </button>
-      </form>
-      <p>
-        <Link href="/login">Back to login</Link>
-      </p>
+      </div>
     </main>
   )
 }

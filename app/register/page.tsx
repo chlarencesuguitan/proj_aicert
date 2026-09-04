@@ -1,6 +1,7 @@
 'use client'
-import Link from 'next/link'
 
+import Image from 'next/image'
+import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -72,82 +73,293 @@ export default function RegisterPage() {
   }
 
   return (
-    <main>
-      <h1>Create an account</h1>
+    <main className="min-h-screen bg-[#f7f6f8] flex items-center justify-center px-6 py-12">
+      <div className="w-full max-w-[430px]">
 
-      <form onSubmit={handleRegister}>
-        <div>
-          <label htmlFor="firstName">First name</label>
-          <input
-            id="firstName"
-            type="text"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            disabled={loading}
-            required
-          />
+        {/* Registration Card */}
+        <div className="bg-white rounded-lg shadow-sm px-8 py-9 sm:px-11 sm:py-10">
+
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
+            <Link href="/" aria-label="Go to homepage">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
+                width={48}
+                height={48}
+                className="object-contain"
+                priority
+              />
+            </Link>
+          </div>
+
+          {/* Heading */}
+          <div className="text-center mb-7">
+            <h1 className="text-[15px] font-medium text-gray-800">
+              Create an Account
+            </h1>
+
+            <p className="text-[10px] text-gray-400 mt-1">
+              Start your AI learning journey
+            </p>
+          </div>
+
+          <form onSubmit={handleRegister} className="space-y-4">
+
+            {/* First and Last Name */}
+            <div className="grid grid-cols-2 gap-3">
+
+              {/* First Name */}
+              <div>
+                <label
+                  htmlFor="firstName"
+                  className="block text-[11px] font-medium text-gray-600 mb-1.5"
+                >
+                  First Name
+                </label>
+
+                <input
+                  id="firstName"
+                  type="text"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  disabled={loading}
+                  required
+                  autoComplete="given-name"
+                  placeholder="First name"
+                  className="
+                    w-full
+                    h-10
+                    rounded-md
+                    border
+                    border-transparent
+                    bg-[#f3f1ed]
+                    px-3
+                    text-xs
+                    text-gray-800
+                    placeholder:text-gray-400
+                    outline-none
+                    transition
+                    focus:border-[#f5b51b]
+                    focus:ring-2
+                    focus:ring-[#f5b51b]/10
+                    disabled:opacity-60
+                  "
+                />
+              </div>
+
+              {/* Last Name */}
+              <div>
+                <label
+                  htmlFor="lastName"
+                  className="block text-[11px] font-medium text-gray-600 mb-1.5"
+                >
+                  Last Name
+                </label>
+
+                <input
+                  id="lastName"
+                  type="text"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                  disabled={loading}
+                  required
+                  autoComplete="family-name"
+                  placeholder="Last name"
+                  className="
+                    w-full
+                    h-10
+                    rounded-md
+                    border
+                    border-transparent
+                    bg-[#f3f1ed]
+                    px-3
+                    text-xs
+                    text-gray-800
+                    placeholder:text-gray-400
+                    outline-none
+                    transition
+                    focus:border-[#f5b51b]
+                    focus:ring-2
+                    focus:ring-[#f5b51b]/10
+                    disabled:opacity-60
+                  "
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-[11px] font-medium text-gray-600 mb-1.5"
+              >
+                Email
+              </label>
+
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                disabled={loading}
+                required
+                autoComplete="email"
+                placeholder="Enter your email"
+                className="
+                  w-full
+                  h-10
+                  rounded-md
+                  border
+                  border-transparent
+                  bg-[#f3f1ed]
+                  px-3
+                  text-xs
+                  text-gray-800
+                  placeholder:text-gray-400
+                  outline-none
+                  transition
+                  focus:border-[#f5b51b]
+                  focus:ring-2
+                  focus:ring-[#f5b51b]/10
+                  disabled:opacity-60
+                "
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-[11px] font-medium text-gray-600 mb-1.5"
+              >
+                Password
+              </label>
+
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                disabled={loading}
+                required
+                autoComplete="new-password"
+                placeholder="Create a password"
+                className="
+                  w-full
+                  h-10
+                  rounded-md
+                  border
+                  border-transparent
+                  bg-[#f3f1ed]
+                  px-3
+                  text-xs
+                  text-gray-800
+                  placeholder:text-gray-400
+                  outline-none
+                  transition
+                  focus:border-[#f5b51b]
+                  focus:ring-2
+                  focus:ring-[#f5b51b]/10
+                  disabled:opacity-60
+                "
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-[11px] font-medium text-gray-600 mb-1.5"
+              >
+                Confirm Password
+              </label>
+
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                disabled={loading}
+                required
+                autoComplete="new-password"
+                placeholder="Confirm your password"
+                className="
+                  w-full
+                  h-10
+                  rounded-md
+                  border
+                  border-transparent
+                  bg-[#f3f1ed]
+                  px-3
+                  text-xs
+                  text-gray-800
+                  placeholder:text-gray-400
+                  outline-none
+                  transition
+                  focus:border-[#f5b51b]
+                  focus:ring-2
+                  focus:ring-[#f5b51b]/10
+                  disabled:opacity-60
+                "
+              />
+            </div>
+
+            {/* Error */}
+            {error && (
+              <p
+                role="alert"
+                className="rounded-md bg-red-50 px-3 py-2 text-[11px] text-red-600"
+              >
+                {error}
+              </p>
+            )}
+
+            {/* Success */}
+            {success && (
+              <p
+                role="status"
+                className="rounded-md bg-green-50 px-3 py-2 text-[11px] text-green-600"
+              >
+                {success}
+              </p>
+            )}
+
+            {/* Create Account Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+                w-full
+                h-10
+                rounded-md
+                bg-[#f7b719]
+                text-[11px]
+                font-medium
+                text-white
+                transition-all
+                hover:bg-[#e9a900]
+                active:scale-[0.99]
+                disabled:cursor-not-allowed
+                disabled:opacity-60
+              "
+            >
+              {loading ? 'Creating account...' : 'Create Account'}
+            </button>
+          </form>
+
+          {/* Login */}
+          <p className="text-center text-[10px] text-gray-500 mt-3">
+            Already have an account?{' '}
+            <Link
+              href="/login"
+              className="font-medium text-[#f0ae16] hover:text-[#d99600] transition-colors"
+            >
+              Log In
+            </Link>
+          </p>
         </div>
-
-        <div>
-          <label htmlFor="lastName">Last name</label>
-          <input
-            id="lastName"
-            type="text"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-            disabled={loading}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            disabled={loading}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            disabled={loading}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="confirmPassword">Confirm password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            disabled={loading}
-            required
-          />
-        </div>
-
-        {error && <p role="alert">{error}</p>}
-
-        {success && <p role="status">{success}</p>}
-
-        <button type="submit" disabled={loading}>
-          {loading ? 'Creating account...' : 'Create account'}
-        </button>
-      </form>
-      <p>
-        Already have an account?{' '}
-        <Link href="/login">Log in</Link>
-      </p>
+      </div>
     </main>
   )
 }
