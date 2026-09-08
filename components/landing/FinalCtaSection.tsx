@@ -19,7 +19,7 @@ export function FinalCtaSection() {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0 lg:shrink-0">
-            <Button href="/register" size="lg">
+            <Button href="/register" size="lg" className="text-white">
               Get started
             </Button>
             <Button href="/courses" variant="secondary" size="lg">

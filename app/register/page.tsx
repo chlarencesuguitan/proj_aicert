@@ -77,7 +77,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-[430px]">
 
         {/* Registration Card */}
-        <div className="bg-white rounded-lg shadow-sm px-8 py-9 sm:px-11 sm:py-10">
+        <div className="bg-white rounded-2xl shadow-sm px-8 py-9 sm:px-11 sm:py-10">
 
           {/* Logo */}
           <div className="flex justify-center mb-6">
@@ -85,8 +85,8 @@ export default function RegisterPage() {
               <Image
                 src="/images/logo.png"
                 alt="Logo"
-                width={48}
-                height={48}
+                width={150}
+                height={150}
                 className="object-contain"
                 priority
               />
@@ -95,8 +95,8 @@ export default function RegisterPage() {
 
           {/* Heading */}
           <div className="text-center mb-7">
-            <h1 className="text-[15px] font-medium text-gray-800">
-              Create an Account
+            <h1 className="text-2xl font-medium text-gray-800">
+              <b>Create an Account</b>
             </h1>
 
             <p className="text-[10px] text-gray-400 mt-1">
@@ -130,7 +130,7 @@ export default function RegisterPage() {
                   className="
                     w-full
                     h-10
-                    rounded-md
+                    rounded-2xl
                     border
                     border-transparent
                     bg-[#f3f1ed]
@@ -140,9 +140,9 @@ export default function RegisterPage() {
                     placeholder:text-gray-400
                     outline-none
                     transition
-                    focus:border-[#f5b51b]
+                    focus:border-[#459A87]
                     focus:ring-2
-                    focus:ring-[#f5b51b]/10
+                    focus:ring-[#459A87]/10
                     disabled:opacity-60
                   "
                 />
@@ -169,7 +169,7 @@ export default function RegisterPage() {
                   className="
                     w-full
                     h-10
-                    rounded-md
+                    rounded-2xl
                     border
                     border-transparent
                     bg-[#f3f1ed]
@@ -179,9 +179,9 @@ export default function RegisterPage() {
                     placeholder:text-gray-400
                     outline-none
                     transition
-                    focus:border-[#f5b51b]
+                    focus:border-[#459A87]
                     focus:ring-2
-                    focus:ring-[#f5b51b]/10
+                    focus:ring-[#459A87]/10
                     disabled:opacity-60
                   "
                 />
@@ -209,7 +209,7 @@ export default function RegisterPage() {
                 className="
                   w-full
                   h-10
-                  rounded-md
+                  rounded-2xl
                   border
                   border-transparent
                   bg-[#f3f1ed]
@@ -219,9 +219,9 @@ export default function RegisterPage() {
                   placeholder:text-gray-400
                   outline-none
                   transition
-                  focus:border-[#f5b51b]
+                  focus:border-[#459A87]
                   focus:ring-2
-                  focus:ring-[#f5b51b]/10
+                  focus:ring-[#459A87]/10
                   disabled:opacity-60
                 "
               />
@@ -248,7 +248,7 @@ export default function RegisterPage() {
                 className="
                   w-full
                   h-10
-                  rounded-md
+                  rounded-2xl
                   border
                   border-transparent
                   bg-[#f3f1ed]
@@ -258,9 +258,9 @@ export default function RegisterPage() {
                   placeholder:text-gray-400
                   outline-none
                   transition
-                  focus:border-[#f5b51b]
+                  focus:border-[#459A87]
                   focus:ring-2
-                  focus:ring-[#f5b51b]/10
+                  focus:ring-[#459A87]/10
                   disabled:opacity-60
                 "
               />
@@ -287,7 +287,7 @@ export default function RegisterPage() {
                 className="
                   w-full
                   h-10
-                  rounded-md
+                  rounded-2xl
                   border
                   border-transparent
                   bg-[#f3f1ed]
@@ -297,9 +297,9 @@ export default function RegisterPage() {
                   placeholder:text-gray-400
                   outline-none
                   transition
-                  focus:border-[#f5b51b]
+                  focus:border-[#459A87]
                   focus:ring-2
-                  focus:ring-[#f5b51b]/10
+                  focus:ring-[#459A87]/10
                   disabled:opacity-60
                 "
               />
@@ -309,7 +309,7 @@ export default function RegisterPage() {
             {error && (
               <p
                 role="alert"
-                className="rounded-md bg-red-50 px-3 py-2 text-[11px] text-red-600"
+                className="rounded-2xl bg-red-50 px-3 py-2 text-[11px] text-red-600"
               >
                 {error}
               </p>
@@ -319,7 +319,7 @@ export default function RegisterPage() {
             {success && (
               <p
                 role="status"
-                className="rounded-md bg-green-50 px-3 py-2 text-[11px] text-green-600"
+                className="rounded-2xl bg-green-50 px-3 py-2 text-[11px] text-green-600"
               >
                 {success}
               </p>
@@ -332,19 +332,19 @@ export default function RegisterPage() {
               className="
                 w-full
                 h-10
-                rounded-md
-                bg-[#f7b719]
+                rounded-2xl
+                bg-[#459A87]
                 text-[11px]
                 font-medium
                 text-white
                 transition-all
-                hover:bg-[#e9a900]
+                hover:bg-[#2f6e60]
                 active:scale-[0.99]
                 disabled:cursor-not-allowed
                 disabled:opacity-60
               "
             >
-              {loading ? 'Creating account...' : 'Create Account'}
+              <b>{loading ? 'Creating account...' : 'Create Account'}</b>
             </button>
           </form>
 
@@ -353,7 +353,7 @@ export default function RegisterPage() {
             Already have an account?{' '}
             <Link
               href="/login"
-              className="font-medium text-[#f0ae16] hover:text-[#d99600] transition-colors"
+              className="font-medium text-[#459A87] hover:text-[#2f6e60] transition-colors"
             >
               Log In
             </Link>

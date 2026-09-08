@@ -56,7 +56,7 @@ export default function LoginPage() {
       <div className="w-full max-w-[430px]">
 
         {/* Login Card */}
-        <div className="bg-white rounded-lg shadow-sm px-8 py-9 sm:px-11 sm:py-10">
+        <div className="bg-white rounded-2xl shadow-sm px-8 py-9 sm:px-11 sm:py-10">
 
           {/* Logo */}
           <div className="flex justify-center mb-6">
@@ -64,8 +64,8 @@ export default function LoginPage() {
               <Image
                 src="/images/logo.png"
                 alt="Logo"
-                width={48}
-                height={48}
+                width={150}
+                height={150}
                 className="object-contain"
                 priority
               />
@@ -74,8 +74,8 @@ export default function LoginPage() {
 
           {/* Heading */}
           <div className="text-center mb-7">
-            <h1 className="text-[15px] font-medium text-gray-800">
-              Login
+            <h1 className="text-2xl font-medium text-gray-800">
+              <b>Login</b>
             </h1>
           </div>
 
@@ -102,7 +102,7 @@ export default function LoginPage() {
                 className="
                   w-full
                   h-10
-                  rounded-md
+                  rounded-2xl
                   border
                   border-transparent
                   bg-[#f3f1ed]
@@ -112,9 +112,9 @@ export default function LoginPage() {
                   placeholder:text-gray-400
                   outline-none
                   transition
-                  focus:border-[#f5b51b]
+                  focus:border-[#459A87]
                   focus:ring-2
-                  focus:ring-[#f5b51b]/10
+                  focus:ring-[#459A87]/10
                   disabled:opacity-60
                 "
               />
@@ -141,7 +141,7 @@ export default function LoginPage() {
                 className="
                   w-full
                   h-10
-                  rounded-md
+                  rounded-2xl
                   border
                   border-transparent
                   bg-[#f3f1ed]
@@ -151,9 +151,9 @@ export default function LoginPage() {
                   placeholder:text-gray-400
                   outline-none
                   transition
-                  focus:border-[#f5b51b]
+                  focus:border-[#459A87]
                   focus:ring-2
-                  focus:ring-[#f5b51b]/10
+                  focus:ring-[#459A87]/10
                   disabled:opacity-60
                 "
               />
@@ -162,7 +162,7 @@ export default function LoginPage() {
               <div className="flex justify-end mt-1.5">
                 <Link
                   href="/forgot-password"
-                  className="text-[10px] text-[#f0ae16] hover:text-[#d99600] transition-colors"
+                  className="text-[10px] text-[#459A87] hover:text-[#2f6e60] transition-colors"
                 >
                   Forgot Password?
                 </Link>
@@ -196,19 +196,19 @@ export default function LoginPage() {
               className="
                 w-full
                 h-10
-                rounded-md
-                bg-[#f7b719]
+                rounded-2xl
+                bg-[#459A87]
                 text-[11px]
                 font-medium
                 text-white
                 transition-all
-                hover:bg-[#e9a900]
+                hover:bg-[#2f6e60]
                 active:scale-[0.99]
                 disabled:cursor-not-allowed
                 disabled:opacity-60
               "
             >
-              {loading ? 'Logging in...' : 'Login'}
+              <b>{loading ? 'Logging in...' : 'Login'}</b>
             </button>
           </form>
 
@@ -217,7 +217,7 @@ export default function LoginPage() {
             Don&apos;t have an account?{' '}
             <Link
               href="/register"
-              className="font-medium text-[#f0ae16] hover:text-[#d99600] transition-colors"
+              className="font-medium text-[#459A87] hover:text-[#2f6e60] transition-colors"
             >
               Sign Up
             </Link>

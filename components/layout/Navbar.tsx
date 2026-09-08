@@ -20,7 +20,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-opacity-5">
       <Container>
         <div className="flex h-16 items-center justify-between gap-4">
           <Logo />
@@ -52,11 +52,11 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-3 md:flex ">
             <Button href="/login" variant="secondary" size="sm">
               Log in
             </Button>
-            <Button href="/register" size="sm">
+            <Button href="/register" size="sm" className="text-white">
               Register
             </Button>
           </div>
