@@ -33,8 +33,9 @@ export function CourseFilters() {
         }
       })
 
+      const query = params.toString()
       startTransition(() => {
-        router.push(`/courses?${params.toString()}`)
+        router.push(query ? `/courses?${query}` : '/courses')
       })
     },
     [router, searchParams]
@@ -51,7 +52,7 @@ export function CourseFilters() {
   }, [searchInput, search, updateParams])
 
   return (
-    <div className="space-y-4">
+    <div className="min-w-0 space-y-4">
       <div>
         <label htmlFor="course-search" className="sr-only">
           Search courses

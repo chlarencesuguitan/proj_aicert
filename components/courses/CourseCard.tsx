@@ -17,9 +17,14 @@ import { Button } from '@/components/ui/Button'
 interface CourseCardProps {
   course: Course
   variant?: 'default' | 'compact'
+  showCertification?: boolean
 }
 
-export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
+export function CourseCard({
+  course,
+  variant = 'default',
+  showCertification = false,
+}: CourseCardProps) {
   const categoryLabel = course.category
     ? COURSE_CATEGORIES[course.category] ?? course.category
     : 'AI Certification'
@@ -59,6 +64,13 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
         {variant === 'default' && course.short_description && (
           <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">
             {course.short_description}
+          </p>
+        )}
+
+        {showCertification && course.certification_requirements && (
+          <p className="mt-3 line-clamp-2 text-xs leading-5 text-muted">
+            <span className="font-semibold text-gray-800">Certification: </span>
+            {course.certification_requirements}
           </p>
         )}
 
