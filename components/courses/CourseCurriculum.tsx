@@ -14,15 +14,15 @@ export function CourseCurriculum({ curriculum }: CourseCurriculumProps) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {curriculum.modules.map((module, moduleIndex) => (
         <details
           key={module.id}
           className="group overflow-hidden rounded-2xl border border-border bg-surface"
           open={moduleIndex === 0}
         >
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 marker:content-none">
-            <div>
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-4 [&::-webkit-details-marker]:hidden">
+            <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-wide text-brand-dark">
                 Module {moduleIndex + 1}
               </p>
@@ -30,15 +30,26 @@ export function CourseCurriculum({ curriculum }: CourseCurriculumProps) {
                 {module.title}
               </h3>
               {module.description && (
-                <p className="mt-1 text-sm text-muted">{module.description}</p>
+                <p className="mt-1 text-sm leading-6 text-muted">
+                  {module.description}
+                </p>
               )}
             </div>
-            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-              {module.lessons.length} lessons
-            </span>
+            <div className="flex shrink-0 items-center gap-3 pt-1">
+              <span className="rounded-full border border-border bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700">
+                {module.lessons.length}{' '}
+                {module.lessons.length === 1 ? 'lesson' : 'lessons'}
+              </span>
+              <span
+                aria-hidden="true"
+                className="text-muted transition-transform group-open:rotate-180"
+              >
+                ▾
+              </span>
+            </div>
           </summary>
 
-          <ul className="border-t border-border">
+          <ol className="border-t border-border">
             {module.lessons.map((lesson, lessonIndex) => (
               <li
                 key={lesson.id}
@@ -47,17 +58,17 @@ export function CourseCurriculum({ curriculum }: CourseCurriculumProps) {
                 <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-light text-xs font-semibold text-brand-dark">
                   {lessonIndex + 1}
                 </span>
-                <div>
+                <div className="min-w-0">
                   <p className="font-medium text-gray-900">{lesson.title}</p>
                   {lesson.description && (
-                    <p className="mt-1 text-sm text-muted">
+                    <p className="mt-1 text-sm leading-6 text-muted">
                       {lesson.description}
                     </p>
                   )}
                 </div>
               </li>
             ))}
-          </ul>
+          </ol>
         </details>
       ))}
     </div>

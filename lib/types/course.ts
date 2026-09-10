@@ -74,3 +74,19 @@ export const LEARNING_TYPE_LABELS: Record<LearningType, string> = {
   self_paced: 'Self-Paced',
   one_on_one: '1-on-1 Training',
 }
+
+export function parseCourseDifficulty(
+  value?: string
+): CourseDifficulty | undefined {
+  if (value === 'beginner' || value === 'intermediate' || value === 'advanced') {
+    return value
+  }
+  return undefined
+}
+
+export function parseLearningType(value?: string): LearningType | undefined {
+  if (value === 'self_paced' || value === 'one_on_one') {
+    return value
+  }
+  return undefined
+}

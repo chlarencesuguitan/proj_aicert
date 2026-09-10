@@ -48,7 +48,7 @@ export function OneOnOneSection() {
                 </p>
               </article>
             ))}
-            <Button href="/courses?learning_type=one_on_one" className="mt-2">
+            <Button href="/courses?learning_type=one_on_one" className="mt-2 text-white">
               View 1-on-1 programs
             </Button>
           </div>

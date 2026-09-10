@@ -9,6 +9,7 @@
 -- 11111111-1111-1111-1111-111111111101 Maria Dela Cruz
 -- 11111111-1111-1111-1111-111111111102 James Santos
 -- 11111111-1111-1111-1111-111111111103 Elena Reyes
+-- 11111111-1111-1111-1111-111111111104 Alex Morgan (sample)
 
 -- Courses
 -- 22222222-2222-2222-2222-222222222201 Introduction to AI
@@ -18,6 +19,7 @@
 -- 22222222-2222-2222-2222-222222222205 Prompt Engineering Masterclass
 -- 22222222-2222-2222-2222-222222222206 AI Ethics & Responsible AI
 -- 22222222-2222-2222-2222-222222222207 Advanced Deep Learning (unpublished)
+-- 22222222-2222-2222-2222-222222222208 [Sample] AI Fundamentals & Practical Applications
 
 insert into auth.users (
     instance_id,
@@ -415,3 +417,7 @@ values
     ('33333333-3333-3333-3333-333333333341', 'Prompt Evaluation Frameworks', 'Measure and optimize prompt performance.', 1, true),
     ('33333333-3333-3333-3333-333333333351', 'Understanding AI Bias', 'Sources, detection, and mitigation.', 0, true),
     ('33333333-3333-3333-3333-333333333352', 'Building an AI Ethics Policy', 'Practical governance for teams.', 0, true);
+
+-- [Sample] AI Fundamentals & Practical Applications
+-- Canonical insert also lives in supabase/sample_ai_fundamentals_course.sql
+\ir sample_ai_fundamentals_course.sql

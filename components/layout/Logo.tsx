@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Logo({ className = '' }: { className?: string }) {
   return (
@@ -9,11 +10,11 @@ export function Logo({ className = '' }: { className?: string }) {
     >
       <span
         aria-hidden="true"
-        className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-lg font-black text-gray-900"
+        className="flex h-10 w-30 items-center justify-center"
       >
-        α
+        <Image src="/images/logo_nav.png" alt="Logo" width={120} height={120} />
       </span>
-      <span className="text-xl tracking-tight">AQBAT</span>
+      {/* <span className="text-xl tracking-tight">AQBAT</span> */}
     </Link>
   )
 }

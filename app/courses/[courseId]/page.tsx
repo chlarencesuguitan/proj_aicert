@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
   formatDuration,
@@ -19,6 +20,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 
 interface CourseDetailPageProps {
   params: Promise<{ courseId: string }>
@@ -65,7 +67,7 @@ export default async function CourseDetailPage({
     return (
       <>
         <Navbar />
-        <main className="py-16">
+        <main className="overflow-x-hidden py-16">
           <Container>
             <div
               role="alert"
@@ -73,6 +75,14 @@ export default async function CourseDetailPage({
             >
               Unable to load this course right now. Please try again later.
             </div>
+            <p className="mt-6">
+              <Link
+                href="/courses"
+                className="text-sm font-semibold text-brand-dark hover:underline"
+              >
+                Back to Courses
+              </Link>
+            </p>
           </Container>
         </main>
         <Footer />
@@ -87,15 +97,25 @@ export default async function CourseDetailPage({
   const categoryLabel = course.category
     ? COURSE_CATEGORIES[course.category] ?? course.category
     : 'AI Certification'
+  const instructorName = getInstructorName(course.instructor)
 
   return (
     <>
       <Navbar />
-      <main>
+      <main className="overflow-x-hidden">
         <section className="border-b border-border bg-surface py-10 sm:py-14">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-              <div>
+            <p className="mb-6 text-sm">
+              <Link
+                href="/courses"
+                className="font-semibold text-brand-dark hover:underline"
+              >
+                ← Back to Courses
+              </Link>
+            </p>
+
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-start">
+              <div className="min-w-0">
                 <div className="mb-4 flex flex-wrap gap-2">
                   <Badge variant="brand">{categoryLabel}</Badge>
                   {course.difficulty && (
@@ -123,7 +143,7 @@ export default async function CourseDetailPage({
                         course.instructor?.avatar_url ??
                         '/images/default-profile.png'
                       }
-                      alt={getInstructorName(course.instructor)}
+                      alt={instructorName}
                       fill
                       className="object-cover"
                       sizes="48px"
@@ -132,7 +152,7 @@ export default async function CourseDetailPage({
                   <div>
                     <p className="text-sm text-muted">Instructor</p>
                     <p className="font-semibold text-gray-900">
-                      {getInstructorName(course.instructor)}
+                      {instructorName}
                     </p>
                   </div>
                 </div>
@@ -170,7 +190,7 @@ export default async function CourseDetailPage({
                 </dl>
               </div>
 
-              <aside className="rounded-3xl border border-border bg-background p-6 shadow-sm lg:sticky lg:top-24">
+              <aside className="rounded-2xl border border-border bg-background p-5 shadow-sm sm:p-6 lg:sticky lg:top-24">
                 <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-2xl bg-gray-100">
                   <Image
                     src={course.thumbnail_url ?? '/images/hero.png'}
@@ -185,17 +205,17 @@ export default async function CourseDetailPage({
                 <p className="text-3xl font-bold text-gray-900">
                   {formatPrice(course.price)}
                 </p>
-                <p className="mt-2 text-sm text-muted">
-                  Full access to course materials and certification pathway.
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  Full access to course materials and the certification pathway.
                 </p>
 
                 <div className="mt-6 space-y-3">
                   <Button
                     href={`/checkout/${course.id}`}
                     size="lg"
-                    className="w-full"
+                    className="w-full text-white"
                   >
-                    Enroll now
+                    Enroll Now
                   </Button>
                   <Button
                     href="/courses"
@@ -203,69 +223,111 @@ export default async function CourseDetailPage({
                     size="lg"
                     className="w-full"
                   >
-                    Back to catalog
+                    Back to Courses
                   </Button>
                 </div>
-
-                {course.certification_requirements && (
-                  <div className="mt-6 rounded-2xl border border-border bg-surface p-4">
-                    <h2 className="text-sm font-semibold text-gray-900">
-                      Certification requirements
-                    </h2>
-                    <p className="mt-2 text-sm leading-6 text-muted">
-                      {course.certification_requirements}
-                    </p>
-                  </div>
-                )}
               </aside>
+            </div>
+          </Container>
+        </section>
+
+        {course.learning_objectives &&
+          course.learning_objectives.length > 0 && (
+            <section className="border-b border-border py-12 sm:py-16">
+              <Container>
+                <SectionHeading
+                  eyebrow="Overview"
+                  title="What You'll Learn"
+                  description="Outcomes for this certification program, drawn from the published course record."
+                />
+                <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {course.learning_objectives.map((objective) => (
+                    <li
+                      key={objective}
+                      className="flex gap-3 rounded-2xl border border-border bg-surface px-4 py-4 text-sm leading-6 text-gray-700"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand"
+                      />
+                      {objective}
+                    </li>
+                  ))}
+                </ul>
+              </Container>
+            </section>
+          )}
+
+        <section className="border-b border-border py-12 sm:py-16">
+          <Container>
+            <SectionHeading
+              eyebrow="Curriculum"
+              title="Course curriculum"
+              description={
+                curriculum
+                  ? `${curriculum.modules.length} modules · ${curriculum.total_lessons} published lessons`
+                  : 'Structured modules and lessons for this certification program.'
+              }
+            />
+            <div className="mt-8 max-w-4xl">
+              {curriculum ? (
+                <CourseCurriculum curriculum={curriculum} />
+              ) : (
+                <p className="text-sm text-muted">
+                  Curriculum details are not available yet.
+                </p>
+              )}
+            </div>
+          </Container>
+        </section>
+
+        <section className="border-b border-border bg-surface py-12 sm:py-16">
+          <Container>
+            <SectionHeading
+              eyebrow="Credential"
+              title="Certification"
+              description="This is an informational overview of the certification pathway. Assessments and certificate issuance are not available in this step."
+            />
+            <div className="mt-8 max-w-3xl rounded-2xl border border-border bg-background p-6">
+              {course.certification_requirements && (
+                <p className="text-sm leading-7 text-gray-700">
+                  {course.certification_requirements}
+                </p>
+              )}
+              <ul className="mt-5 space-y-3 text-sm leading-6 text-gray-700">
+                <li>Complete the required course modules and lessons.</li>
+                <li>Complete required assessments when they become available.</li>
+                <li>Meet the published course completion requirements.</li>
+              </ul>
             </div>
           </Container>
         </section>
 
         <section className="py-12 sm:py-16">
           <Container>
-            <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-              {course.learning_objectives &&
-                course.learning_objectives.length > 0 && (
-                  <div>
-                    <h2 className="text-2xl font-bold text-gray-900">
-                      Learning objectives
-                    </h2>
-                    <ul className="mt-5 space-y-3">
-                      {course.learning_objectives.map((objective) => (
-                        <li
-                          key={objective}
-                          className="flex gap-3 text-sm leading-6 text-gray-700"
-                        >
-                          <span
-                            aria-hidden="true"
-                            className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand"
-                          />
-                          {objective}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  Course curriculum
-                </h2>
-                <p className="mt-2 text-sm text-muted">
-                  {curriculum
-                    ? `${curriculum.modules.length} modules · ${curriculum.total_lessons} lessons`
-                    : 'Structured modules and lessons'}
+            <SectionHeading
+              eyebrow="Faculty"
+              title="Your instructor"
+              description="Learn from a trainer associated with this published program."
+            />
+            <div className="mt-8 flex max-w-xl items-start gap-4 rounded-2xl border border-border bg-surface p-6">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                <Image
+                  src={
+                    course.instructor?.avatar_url ??
+                    '/images/default-profile.png'
+                  }
+                  alt={instructorName}
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                />
+              </div>
+              <div className="min-w-0">
+                <p className="text-lg font-semibold text-gray-900">
+                  {instructorName}
                 </p>
-                <div className="mt-6">
-                  {curriculum ? (
-                    <CourseCurriculum curriculum={curriculum} />
-                  ) : (
-                    <p className="text-sm text-muted">
-                      Curriculum details are not available yet.
-                    </p>
-                  )}
-                </div>
+                <p className="mt-1 text-sm text-muted">AQBAT Trainer</p>
               </div>
             </div>
           </Container>

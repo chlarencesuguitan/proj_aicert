@@ -7,9 +7,13 @@ import type {
   CourseModule,
   Instructor,
 } from '@/lib/types/course'
+import {
+  parseCourseDifficulty,
+  parseLearningType,
+} from '@/lib/types/course'
 
 const UUID_PATTERN =
-  /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
 function isUuid(value: string): boolean {
   return UUID_PATTERN.test(value)
@@ -44,6 +48,7 @@ type ModuleRow = {
     title: string
     description: string | null
     sort_order: number
+    is_published?: boolean
   }[]
 }
 
@@ -148,12 +153,14 @@ function applyFilters<
     q = q.eq('category', filters.category)
   }
 
-  if (filters?.difficulty) {
-    q = q.eq('difficulty', filters.difficulty)
+  const difficulty = parseCourseDifficulty(filters?.difficulty)
+  if (difficulty) {
+    q = q.eq('difficulty', difficulty)
   }
 
-  if (filters?.learning_type) {
-    q = q.eq('learning_type', filters.learning_type)
+  const learningType = parseLearningType(filters?.learning_type)
+  if (learningType) {
+    q = q.eq('learning_type', learningType)
   }
 
   return q
@@ -298,7 +305,8 @@ export async function getCourseCurriculum(
         id,
         title,
         description,
-        sort_order
+        sort_order,
+        is_published
       )
     `
     )
@@ -315,9 +323,15 @@ export async function getCourseCurriculum(
       title: module.title,
       description: module.description,
       sort_order: module.sort_order,
-      lessons: (module.lessons ?? []).sort(
-        (a, b) => a.sort_order - b.sort_order
-      ),
+      lessons: (module.lessons ?? [])
+        .filter((lesson) => lesson.is_published !== false)
+        .sort((a, b) => a.sort_order - b.sort_order)
+        .map(({ id, title, description, sort_order }) => ({
+          id,
+          title,
+          description,
+          sort_order,
+        })),
     })
   )
 

@@ -85,16 +85,16 @@ export default function ResetPasswordPage() {
     return (
       <main className="min-h-screen bg-[#f7f6f8] flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-lg shadow-sm px-8 py-10 sm:px-10">
+          <div className="bg-white rounded-2xl shadow-sm px-8 py-10 sm:px-10">
 
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <Link href="/" aria-label="Go to homepage">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo_nav.png"
                   alt="Logo"
-                  width={48}
-                  height={48}
+                  width={150}
+                  height={150}
                   priority
                   className="object-contain"
                 />
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
               {error ? (
                 <div
                   role="alert"
-                  className="mt-4 rounded-md bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
+                  className="mt-4 rounded-2xl bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
                 >
                   {error}
                 </div>
@@ -126,7 +126,7 @@ export default function ResetPasswordPage() {
               <p className="mt-5 text-center text-xs text-gray-500">
                 <Link
                   href="/login"
-                  className="font-medium text-[#e8aa0f] transition hover:text-[#c98f00]"
+                  className="font-medium text-[#459A87] transition hover:text-[#2f6e60]"
                 >
                   Back to Login
                 </Link>
@@ -141,7 +141,7 @@ export default function ResetPasswordPage() {
   return (
     <main className="min-h-screen bg-[#f7f6f8] flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-sm px-8 py-10 sm:px-10">
+        <div className="bg-white rounded-2xl shadow-sm px-8 py-10 sm:px-10">
 
           {/* Logo */}
           <div className="flex justify-center mb-6">
@@ -159,8 +159,8 @@ export default function ResetPasswordPage() {
 
           {/* Heading */}
           <div className="text-center mb-7">
-            <h1 className="text-base font-medium text-gray-800">
-              Reset Password
+            <h1 className="text-2xl font-medium text-gray-800">
+              <b>Reset Password</b>
             </h1>
 
             <p className="mt-2 text-xs leading-relaxed text-gray-400">
@@ -191,7 +191,7 @@ export default function ResetPasswordPage() {
                 className="
                   h-10
                   w-full
-                  rounded-md
+                  rounded-2xl
                   bg-[#f3f1ed]
                   px-3
                   text-xs
@@ -232,7 +232,7 @@ export default function ResetPasswordPage() {
                 className="
                   h-10
                   w-full
-                  rounded-md
+                  rounded-2xl
                   bg-[#f3f1ed]
                   px-3
                   text-xs
@@ -254,7 +254,7 @@ export default function ResetPasswordPage() {
             {error && (
               <div
                 role="alert"
-                className="rounded-md bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
+                className="rounded-2xl bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-600"
               >
                 {error}
               </div>
@@ -264,7 +264,7 @@ export default function ResetPasswordPage() {
             {success && (
               <div
                 role="status"
-                className="rounded-md bg-green-50 px-3 py-2 text-xs leading-relaxed text-green-600"
+                className="rounded-2xl bg-green-50 px-3 py-2 text-xs leading-relaxed text-green-600"
               >
                 {success}
               </div>
@@ -277,7 +277,7 @@ export default function ResetPasswordPage() {
               className="
                 h-10
                 w-full
-                rounded-md
+                rounded-2xl
                 bg-[#f5b719]
                 text-xs
                 font-medium

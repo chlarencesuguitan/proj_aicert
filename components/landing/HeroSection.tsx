@@ -9,10 +9,10 @@ export function HeroSection() {
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-dark">
-              Learn. Grow. Get Certified.
+              Assess. Upskill. Certify. Transform.
             </p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-              <span className="text-brand">AQBAT</span> AI Certification
+              <span className="text-brand">AQUIBAT</span> Certification
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted">
               Build job-ready AI skills with structured certification programs,
@@ -20,7 +20,7 @@ export function HeroSection() {
               professionals, creators, and teams.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/register" size="lg">
+              <Button href="/register" size="lg" className="text-white">
                 Register
               </Button>
               <Button href="/courses" variant="secondary" size="lg">
@@ -30,7 +30,7 @@ export function HeroSection() {
           </div>
 
           <div className="relative mx-auto w-full max-w-xl">
-            <div className="overflow-hidden rounded-3xl border border-border bg-brand-light shadow-lg">
+            <div className="overflow-hidden">
               <Image
                 src="/images/hero.png"
                 alt="Student learning AI with a friendly robot assistant"

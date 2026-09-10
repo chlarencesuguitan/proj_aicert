@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Suspense } from 'react'
-import type { CourseDifficulty, LearningType } from '@/lib/types/course'
 import { getPublishedCourses } from '@/lib/courses/queries'
+import {
+  parseCourseDifficulty,
+  parseLearningType,
+} from '@/lib/types/course'
 import { CourseCard } from '@/components/courses/CourseCard'
 import { CourseFilters } from '@/components/courses/CourseFilters'
 import { Footer } from '@/components/layout/Footer'
@@ -36,21 +40,47 @@ function CoursesLoading() {
   )
 }
 
+function CatalogState({
+  title,
+  description,
+  action,
+}: {
+  title: string
+  description: string
+  action?: React.ReactNode
+}) {
+  return (
+    <div className="rounded-2xl border border-border bg-surface px-6 py-12 text-center shadow-sm">
+      <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
+        {description}
+      </p>
+      {action ? <div className="mt-6">{action}</div> : null}
+    </div>
+  )
+}
+
 async function CoursesContent({
   searchParams,
 }: {
   searchParams: CoursesPageProps['searchParams']
 }) {
   const params = await searchParams
+  const search = params.search?.trim() || undefined
+  const category = params.category?.trim() || undefined
+  const difficulty = parseCourseDifficulty(params.difficulty)
+  const learningType = parseLearningType(params.learning_type)
 
-  const filters = {
-    search: params.search,
-    category: params.category,
-    difficulty: params.difficulty as CourseDifficulty | undefined,
-    learning_type: params.learning_type as LearningType | undefined,
-  }
+  const hasActiveFilters = Boolean(
+    search || category || difficulty || learningType
+  )
 
-  const { data: courses, error } = await getPublishedCourses(filters)
+  const { data: courses, error } = await getPublishedCourses({
+    search,
+    category,
+    difficulty,
+    learning_type: learningType,
+  })
 
   if (error) {
     return (
@@ -63,23 +93,42 @@ async function CoursesContent({
     )
   }
 
+  if (courses.length === 0 && !hasActiveFilters) {
+    return (
+      <CatalogState
+        title="No published courses yet"
+        description="Certification programs will appear here once they are published. Check back soon or explore the rest of the platform in the meantime."
+      />
+    )
+  }
+
   if (courses.length === 0) {
     return (
-      <div className="rounded-2xl border border-border bg-surface px-6 py-12 text-center shadow-sm">
-        <h2 className="text-lg font-semibold text-gray-900">No courses found</h2>
-        <p className="mt-2 text-sm text-muted">
-          Try adjusting your search or filters to discover available
-          certification programs.
-        </p>
-      </div>
+      <CatalogState
+        title="No matching courses"
+        description="We could not find a published course that matches your search and filters. Try a different keyword or clear your filters to see all available programs."
+        action={
+          <Link
+            href="/courses"
+            className="inline-flex rounded-xl border border-brand px-4 py-2 text-sm font-semibold text-brand-dark hover:bg-brand-light"
+          >
+            Clear search and filters
+          </Link>
+        }
+      />
     )
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {courses.map((course) => (
-        <CourseCard key={course.id} course={course} />
-      ))}
+    <div>
+      <p className="mb-4 text-sm text-muted">
+        Showing {courses.length} {courses.length === 1 ? 'course' : 'courses'}
+      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course} showCertification />
+        ))}
+      </div>
     </div>
   )
 }
@@ -88,7 +137,7 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   return (
     <>
       <Navbar />
-      <main className="py-10 sm:py-14">
+      <main className="overflow-x-hidden py-10 sm:py-14">
         <Container>
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-dark">
@@ -104,7 +153,11 @@ export default async function CoursesPage({ searchParams }: CoursesPageProps) {
           </div>
 
           <div className="mt-10">
-            <Suspense fallback={<div className="h-24 animate-pulse rounded-2xl bg-gray-100" />}>
+            <Suspense
+              fallback={
+                <div className="h-24 animate-pulse rounded-2xl bg-gray-100" />
+              }
+            >
               <CourseFilters />
             </Suspense>
           </div>

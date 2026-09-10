@@ -50,16 +50,16 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-md">
 
         {/* Card */}
-        <div className="bg-white rounded-lg shadow-sm px-8 py-10 sm:px-10">
+        <div className="bg-white rounded-2xl shadow-sm px-8 py-10 sm:px-10">
 
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <Link href="/" aria-label="Go to homepage">
               <Image
-                src="/images/logo.png"
+                src="/images/logo_nav.png"
                 alt="Logo"
-                width={48}
-                height={48}
+                width={150}
+                height={150}
                 priority
                 className="object-contain"
               />
@@ -68,8 +68,8 @@ export default function ForgotPasswordPage() {
 
           {/* Header */}
           <div className="text-center mb-7">
-            <h1 className="text-base font-medium text-gray-800">
-              Forgot Password?
+            <h1 className="text-2xl font-medium text-gray-800">
+              <b>Forgot Password?</b>
             </h1>
 
             <p className="mt-2 text-xs leading-relaxed text-gray-400">
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
                 className="
                   h-10
                   w-full
-                  rounded-md
+                  rounded-2xl
                   bg-[#f3f1ed]
                   px-3
                   text-xs
@@ -112,8 +112,8 @@ export default function ForgotPasswordPage() {
                   transition
                   focus:bg-white
                   focus:ring-2
-                  focus:ring-[#f5b719]/20
-                  focus:border-[#f5b719]
+                  focus:ring-[#459A87]/20
+                  focus:border-[#459A87]
                   disabled:cursor-not-allowed
                   disabled:opacity-60
                 "
@@ -124,7 +124,7 @@ export default function ForgotPasswordPage() {
             {error && (
               <div
                 role="alert"
-                className="rounded-md bg-red-50 px-3 py-2 text-xs text-red-600"
+                className="rounded-2xl bg-red-50 px-3 py-2 text-xs text-red-600"
               >
                 {error}
               </div>
@@ -134,7 +134,7 @@ export default function ForgotPasswordPage() {
             {success && (
               <div
                 role="status"
-                className="rounded-md bg-green-50 px-3 py-2 text-xs leading-relaxed text-green-600"
+                className="rounded-2xl bg-green-50 px-3 py-2 text-xs leading-relaxed text-green-600"
               >
                 {success}
               </div>
@@ -147,19 +147,19 @@ export default function ForgotPasswordPage() {
               className="
                 h-10
                 w-full
-                rounded-md
-                bg-[#f5b719]
+                rounded-2xl
+                bg-[#459A87]
                 text-xs
                 font-medium
                 text-white
                 transition
-                hover:bg-[#e8aa0f]
+                hover:bg-[#2f6e60]
                 active:scale-[0.99]
                 disabled:cursor-not-allowed
                 disabled:opacity-60
               "
             >
-              {loading ? 'Sending...' : 'Send Reset Link'}
+              <b>{loading ? 'Sending...' : 'Send Reset Link'}</b>
             </button>
           </form>
 
@@ -168,7 +168,7 @@ export default function ForgotPasswordPage() {
             Remember your password?{' '}
             <Link
               href="/login"
-              className="font-medium text-[#e8aa0f] transition hover:text-[#c98f00]"
+              className="font-medium text-[#459A87] transition hover:text-[#2f6e60]"
             >
               Back to Login
             </Link>

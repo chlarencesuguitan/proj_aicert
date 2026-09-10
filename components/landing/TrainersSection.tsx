@@ -4,10 +4,10 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 
 const trainers = [
   {
-    name: 'Maria Dela Cruz',
+    name: 'Chedrick Salazar',
     title: 'Lead AI Instructor',
     bio: 'Specializes in AI fundamentals, responsible AI, and helping non-technical professionals build practical AI literacy.',
-    image: '/images/default-profile.png',
+    image: '/images/1.jpg',
   },
   {
     name: 'James Santos',
