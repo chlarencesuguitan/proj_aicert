@@ -7,7 +7,7 @@ export function HeroSection() {
     <section className="bg-surface py-16 sm:py-20 lg:py-24">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <div className="order-2 lg:order-1">
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-dark">
               Assess. Upskill. Certify. Transform.
             </p>
@@ -29,7 +29,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
+          <div className="order-1 lg:order-2 relative mx-auto hidden w-full max-w-xl lg:block">
             <div className="overflow-hidden">
               <Image
                 src="/images/hero.png"
