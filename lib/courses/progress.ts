@@ -1,5 +1,16 @@
 import { createClient } from '@/lib/supabase/server'
 
+type EnrollmentRow = {
+  course_id: string
+  status: string
+  courses: {
+    id: string
+    title: string
+    thumbnail_url: string | null
+    slug: string
+  } | null
+}
+
 export async function getEnrolledCoursesWithProgress(studentId: string) {
   const supabase = await createClient()
 
@@ -12,7 +23,7 @@ export async function getEnrolledCoursesWithProgress(studentId: string) {
   if (enrollErr || !enrollments) return []
 
   const results = await Promise.all(
-    enrollments.map(async (enrollment: any) => {
+    (enrollments as unknown as EnrollmentRow[]).map(async (enrollment) => {
       const course = enrollment.courses
 
       // 1. Get all module ids for this course
@@ -50,9 +61,11 @@ export async function getEnrolledCoursesWithProgress(studentId: string) {
 
       const progress = Math.round(((completedLessons ?? 0) / totalLessons) * 100)
 
-      return { course, progress, totalLessons, completedLessons: completedLessons ?? 0 }
+        return { course, progress, totalLessons, completedLessons: completedLessons ?? 0 }
     })
   )
 
-  return results
+  return results.filter(
+    (r): r is typeof r & { course: NonNullable<typeof r.course> } => r.course !== null
+  )
 }
